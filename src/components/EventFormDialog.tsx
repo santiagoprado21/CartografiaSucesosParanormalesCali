@@ -109,7 +109,7 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
   };
 
   const imageOptions = [
-    { value: "", label: "Sin imagen" },
+    { value: "no-image", label: "Sin imagen" },
     { value: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7", label: "Mujer con laptop" },
     { value: "https://images.unsplash.com/photo-1518770660439-4636190af475", label: "Circuito negro" },
     { value: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d", label: "Persona con MacBook" },
@@ -251,8 +251,8 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
           <div className="grid gap-2">
             <Label htmlFor="imageUrl">Imagen</Label>
             <Select 
-              value={formData.imageUrl || ""} 
-              onValueChange={(value) => handleChange("imageUrl", value)}
+              value={formData.imageUrl || "no-image"} 
+              onValueChange={(value) => handleChange("imageUrl", value === "no-image" ? "" : value)}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Selecciona una imagen" />
