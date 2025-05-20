@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -10,17 +9,42 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { EventFormDialog } from "@/components/EventFormDialog";
 
-interface MapContainerProps {
+// Define the MapContainer props interface
+export interface MapContainerProps {
   className?: string;
+  activeFilters?: {
+    types: {
+      apparition: boolean;
+      aggression: boolean;
+      sound: boolean;
+      other: boolean;
+    };
+    genders: {
+      male: boolean;
+      female: boolean;
+      other: boolean;
+    }
+  };
+  onTypeFilterChange?: (type: string, checked: boolean) => void;
+  onGenderFilterChange?: (gender: string, checked: boolean) => void;
 }
 
-export function MapContainer({ className }: MapContainerProps) {
+export function MapContainer({ 
+  className, 
+  activeFilters: externalActiveFilters,
+  onTypeFilterChange: externalTypeFilterChange,
+  onGenderFilterChange: externalGenderFilterChange
+}: MapContainerProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const markers = useRef<L.Marker[]>([]);
   const [mapStyle, setMapStyle] = useState<string>('dark');
   const [events, setEvents] = useState<ParanormalEvent[]>(MOCK_EVENTS);
-  const [activeFilters, setActiveFilters] = useState({
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState<ParanormalEvent | null>(null);
+  
+  // Use external filters if provided, otherwise use internal state
+  const [internalActiveFilters, setInternalActiveFilters] = useState({
     types: {
       apparition: true,
       aggression: true,
@@ -33,8 +57,9 @@ export function MapContainer({ className }: MapContainerProps) {
       other: true
     }
   });
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [currentEvent, setCurrentEvent] = useState<ParanormalEvent | null>(null);
+
+  // Use external filters if provided, otherwise use internal ones
+  const activeFilters = externalActiveFilters || internalActiveFilters;
   
   // Inicializar mapa
   useEffect(() => {
@@ -221,23 +246,31 @@ export function MapContainer({ className }: MapContainerProps) {
 
   // Manejar filtros
   const handleTypeFilterChange = (type: keyof typeof activeFilters.types, checked: boolean) => {
-    setActiveFilters(prev => ({
-      ...prev,
-      types: {
-        ...prev.types,
-        [type]: checked
-      }
-    }));
+    if (externalTypeFilterChange) {
+      externalTypeFilterChange(type, checked);
+    } else {
+      setInternalActiveFilters(prev => ({
+        ...prev,
+        types: {
+          ...prev.types,
+          [type]: checked
+        }
+      }));
+    }
   };
 
   const handleGenderFilterChange = (gender: keyof typeof activeFilters.genders, checked: boolean) => {
-    setActiveFilters(prev => ({
-      ...prev,
-      genders: {
-        ...prev.genders,
-        [gender]: checked
-      }
-    }));
+    if (externalGenderFilterChange) {
+      externalGenderFilterChange(gender, checked);
+    } else {
+      setInternalActiveFilters(prev => ({
+        ...prev,
+        genders: {
+          ...prev.genders,
+          [gender]: checked
+        }
+      }));
+    }
   };
 
   // Manejar eventos
