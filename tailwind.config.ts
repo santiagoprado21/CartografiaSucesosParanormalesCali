@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Colores para tipos de eventos
+				event: {
+					apparition: '#8B5CF6', // Púrpura para apariciones
+					aggression: '#F97316', // Naranja para agresiones
+					sound: '#0EA5E9', // Azul para sonidos
+					other: '#2DD4BF', // Turquesa para otros
+				},
+				// Colores para género
+				gender: {
+					female: '#FFDEE2', // Rosa suave para mujer
+					male: '#D3E4FD', // Azul suave para hombre
+					other: '#E5DEFF', // Púrpura suave para otro
 				}
 			},
 			borderRadius: {
@@ -70,25 +84,27 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.6' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-slow': 'pulse-slow 3s ease-in-out infinite'
+			},
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				serif: ['Merriweather', 'serif'],
+				display: ['Cinzel', 'serif']
 			}
 		}
 	},
