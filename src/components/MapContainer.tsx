@@ -208,7 +208,7 @@ export function MapContainer({ className }: MapContainerProps) {
         </Tabs>
       </div>
       
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .custom-leaflet-marker {
           background: transparent;
           border: none;
@@ -230,7 +230,7 @@ export function MapContainer({ className }: MapContainerProps) {
         .leaflet-container {
           font-family: 'Inter', sans-serif;
         }
-      `}</style>
+      `}} />
     </div>
   );
 }
