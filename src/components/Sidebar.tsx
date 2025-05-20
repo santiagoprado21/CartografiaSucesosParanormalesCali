@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -7,17 +6,31 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Ghost, Angry, Speaker, HelpCircle, UserRound, Info, Layers } from "lucide-react";
 
-interface SidebarProps {
+export interface SidebarProps {
   onTypeFilterChange: (type: string, checked: boolean) => void;
   onGenderFilterChange: (gender: string, checked: boolean) => void;
   activeCounts: {
     types: Record<string, number>;
     genders: Record<string, number>;
     total: number;
+    verified?: number;
+  };
+  activeFilters?: {
+    types: {
+      apparition: boolean;
+      aggression: boolean;
+      sound: boolean;
+      other: boolean;
+    };
+    genders: {
+      male: boolean;
+      female: boolean;
+      other: boolean;
+    }
   };
 }
 
-export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts }: SidebarProps) {
+export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts, activeFilters }: SidebarProps) {
   return (
     <div className="flex flex-col h-full">
       <div className="text-center mb-6">
@@ -179,18 +192,22 @@ export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts
   );
 }
 
-function FilterOption({ id, icon, label, count, color, onCheckedChange }: {
+function FilterOption({ id, icon, label, count, color, onCheckedChange, isChecked: externalIsChecked }: {
   id: string;
   icon?: React.ReactNode;
   label: string;
   count: number;
   color: string;
   onCheckedChange: (checked: boolean) => void;
+  isChecked?: boolean;
 }) {
-  const [isChecked, setIsChecked] = useState(true);
+  const [internalIsChecked, setInternalIsChecked] = useState(true);
+  
+  // Use externally controlled state if provided
+  const isChecked = externalIsChecked !== undefined ? externalIsChecked : internalIsChecked;
   
   const handleChange = (checked: boolean) => {
-    setIsChecked(checked);
+    setInternalIsChecked(checked);
     onCheckedChange(checked);
   };
   
@@ -198,7 +215,7 @@ function FilterOption({ id, icon, label, count, color, onCheckedChange }: {
     <div className="flex items-center space-x-2">
       <Checkbox 
         id={id} 
-        defaultChecked 
+        checked={isChecked}
         onCheckedChange={handleChange}
       />
       <div className="flex flex-1 items-center">

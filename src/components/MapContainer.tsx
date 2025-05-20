@@ -4,7 +4,6 @@ import 'leaflet/dist/leaflet.css';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from '@/lib/utils';
 import { ParanormalEvent } from '@/types/ParanormalEvent';
-import { MOCK_EVENTS } from '@/data/mockEvents';
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { EventFormDialog } from "@/components/EventFormDialog";
@@ -25,23 +24,32 @@ export interface MapContainerProps {
       other: boolean;
     }
   };
+  events?: ParanormalEvent[];
   onTypeFilterChange?: (type: string, checked: boolean) => void;
   onGenderFilterChange?: (gender: string, checked: boolean) => void;
+  onEditEvent?: (event: ParanormalEvent) => void;
+  onDeleteEvent?: (eventId: string) => void;
 }
 
 export function MapContainer({ 
   className, 
   activeFilters: externalActiveFilters,
+  events = [],
   onTypeFilterChange: externalTypeFilterChange,
-  onGenderFilterChange: externalGenderFilterChange
+  onGenderFilterChange: externalGenderFilterChange,
+  onEditEvent: externalEditEvent,
+  onDeleteEvent: externalDeleteEvent
 }: MapContainerProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const markers = useRef<L.Marker[]>([]);
   const [mapStyle, setMapStyle] = useState<string>('dark');
-  const [events, setEvents] = useState<ParanormalEvent[]>(MOCK_EVENTS);
+  const [internalEvents, setInternalEvents] = useState<ParanormalEvent[]>([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentEvent, setCurrentEvent] = useState<ParanormalEvent | null>(null);
+  
+  // Use external events if provided, otherwise use internal state
+  const displayEvents = events.length > 0 ? events : internalEvents;
   
   // Use external filters if provided, otherwise use internal state
   const [internalActiveFilters, setInternalActiveFilters] = useState({
@@ -89,7 +97,7 @@ export function MapContainer({
   // Actualizar marcadores cuando cambian los eventos o filtros
   useEffect(() => {
     renderEvents();
-  }, [events, activeFilters]);
+  }, [displayEvents, activeFilters]);
   
   // Función para actualizar el estilo del mapa
   const updateMapStyle = (style: string) => {
@@ -143,7 +151,7 @@ export function MapContainer({
     markers.current = [];
     
     // Filtrar eventos según los filtros activos
-    const filteredEvents = events.filter(event => 
+    const filteredEvents = displayEvents.filter(event => 
       activeFilters.types[event.type as keyof typeof activeFilters.types] &&
       activeFilters.genders[event.reporterGender as keyof typeof activeFilters.genders]
     );
@@ -222,11 +230,7 @@ export function MapContainer({
           const editBtn = document.querySelector(`.edit-event-btn[data-event-id="${event.id}"]`) as HTMLElement;
           if (editBtn) {
             editBtn.addEventListener('click', () => {
-              const eventToEdit = events.find(e => e.id === event.id);
-              if (eventToEdit) {
-                setCurrentEvent(eventToEdit);
-                setIsFormOpen(true);
-              }
+              handleEditEvent(event);
             });
           }
         }, 100);
@@ -245,7 +249,7 @@ export function MapContainer({
   };
 
   // Manejar filtros
-  const handleTypeFilterChange = (type: keyof typeof activeFilters.types, checked: boolean) => {
+  const handleTypeFilterChange = (type: string, checked: boolean) => {
     if (externalTypeFilterChange) {
       externalTypeFilterChange(type, checked);
     } else {
@@ -259,7 +263,7 @@ export function MapContainer({
     }
   };
 
-  const handleGenderFilterChange = (gender: keyof typeof activeFilters.genders, checked: boolean) => {
+  const handleGenderFilterChange = (gender: string, checked: boolean) => {
     if (externalGenderFilterChange) {
       externalGenderFilterChange(gender, checked);
     } else {
@@ -279,22 +283,41 @@ export function MapContainer({
     setIsFormOpen(true);
   };
 
-  const handleSaveEvent = (event: ParanormalEvent) => {
-    if (currentEvent) {
-      // Editar evento existente
-      setEvents(prevEvents => 
-        prevEvents.map(e => e.id === event.id ? event : e)
-      );
+  const handleEditEvent = (event: ParanormalEvent) => {
+    if (externalEditEvent) {
+      externalEditEvent(event);
     } else {
-      // Añadir nuevo evento
-      const newEvent = {
-        ...event,
-        id: crypto.randomUUID(),
-      };
-      setEvents(prevEvents => [...prevEvents, newEvent]);
+      setCurrentEvent(event);
+      setIsFormOpen(true);
+    }
+  };
+
+  const handleSaveEvent = (event: ParanormalEvent) => {
+    if (!externalEditEvent) {
+      if (currentEvent) {
+        // Editar evento existente
+        setInternalEvents(prevEvents => 
+          prevEvents.map(e => e.id === event.id ? event : e)
+        );
+      } else {
+        // Añadir nuevo evento
+        const newEvent = {
+          ...event,
+          id: crypto.randomUUID(),
+        };
+        setInternalEvents(prevEvents => [...prevEvents, newEvent]);
+      }
     }
     setIsFormOpen(false);
     setCurrentEvent(null);
+  };
+
+  const handleDeleteEvent = (eventId: string) => {
+    if (externalDeleteEvent) {
+      externalDeleteEvent(eventId);
+    } else {
+      setInternalEvents(prev => prev.filter(e => e.id !== eventId));
+    }
   };
 
   return (
