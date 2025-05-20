@@ -58,7 +58,7 @@ export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts
                     id="Aparicion"
                     icon={<Ghost className="h-5 w-5 text-event-Aparicion" />}
                     label="Aparicion"
-                    count={activeCounts.types.apparition || 0}
+                    count={activeCounts.types.Aparicion || 0}
                     color="bg-event-Aparicion"
                     onCheckedChange={(checked) => onTypeFilterChange('Aparicion', checked)}
                   />

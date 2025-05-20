@@ -216,7 +216,7 @@ export function MapContainer({
           </div>
           <div class="mt-1 flex items-center gap-2">
             <span class="inline-block w-3 h-3 rounded-full" style="background-color:${backgroundColor}"></span>
-            <span class="text-sm">${event.reporterGender.charAt(0).toUpperCase() + event.reporterGender.slice(1)} witness</span>
+            <span class="text-sm">${event.reporterGender.charAt(0).toUpperCase() + event.reporterGender.slice(1)} </span>
           </div>
           <div class="mt-3 text-center">
             <button class="edit-event-btn bg-primary text-primary-foreground hover:bg-primary/90 px-2 py-1 rounded text-xs" data-event-id="${event.id}">Editar evento</button>
