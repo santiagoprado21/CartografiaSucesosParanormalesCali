@@ -13,15 +13,15 @@ export interface MapContainerProps {
   className?: string;
   activeFilters?: {
     types: {
-      apparition: boolean;
-      aggression: boolean;
-      sound: boolean;
-      other: boolean;
+      Aparicion: boolean;
+      Agresion: boolean;
+      Sonido: boolean;
+      Otro: boolean;
     };
     genders: {
-      male: boolean;
-      female: boolean;
-      other: boolean;
+      Masculino: boolean;
+      Femenino: boolean;
+      Otro: boolean;
     }
   };
   events?: ParanormalEvent[];
@@ -54,15 +54,15 @@ export function MapContainer({
   // Use external filters if provided, otherwise use internal state
   const [internalActiveFilters, setInternalActiveFilters] = useState({
     types: {
-      apparition: true,
-      aggression: true,
-      sound: true,
-      other: true
+      Aparicion: true,
+      Agresion: true,
+      Sonido: true,
+      Otro: true
     },
     genders: {
-      male: true,
-      female: true,
-      other: true
+      Masculino: true,
+      Femenino: true,
+      Otro: true
     }
   });
 
@@ -161,10 +161,10 @@ export function MapContainer({
       // Colores según género
       let backgroundColor;
       switch(event.reporterGender) {
-        case 'female':
+        case 'Femenino':
           backgroundColor = '#FFDEE2';
           break;
-        case 'male':
+        case 'Masculino':
           backgroundColor = '#D3E4FD';
           break;
         default:
@@ -174,15 +174,15 @@ export function MapContainer({
       // Colores e iconos según tipo
       let borderColor, icon;
       switch(event.type) {
-        case 'apparition':
+        case 'Aparicion':
           borderColor = '#8B5CF6';
           icon = '👻';
           break;
-        case 'aggression':
+        case 'Agresion':
           borderColor = '#F97316';
           icon = '👹';
           break;
-        case 'sound':
+        case 'Sonido':
           borderColor = '#0EA5E9';
           icon = '🔊';
           break;
@@ -322,31 +322,42 @@ export function MapContainer({
 
   return (
     <div className={cn("relative w-full h-full", className)}>
-      <div ref={mapContainer} className="absolute inset-0" />
-      <div className="absolute top-4 left-4 z-10 bg-card p-2 rounded-md shadow-lg border border-border">
+      <div
+        ref={mapContainer}
+        className="absolute inset-0"
+        style={{ zIndex: 1 }} // Asegura que el mapa quede en el fondo
+      />
+  
+      <div
+        className="absolute top-4 left-4 bg-card p-2 rounded-md shadow-lg border border-border"
+        style={{ zIndex: 10 }} // Tabs encima del mapa
+      >
         <Tabs defaultValue="dark" onValueChange={handleMapStyleChange}>
           <TabsList className="grid grid-cols-3 w-[300px]">
-            <TabsTrigger value="dark">Dark</TabsTrigger>
-            <TabsTrigger value="satellite">Satellite</TabsTrigger>
-            <TabsTrigger value="light">Light</TabsTrigger>
+            <TabsTrigger value="dark">Oscuro</TabsTrigger>
+            <TabsTrigger value="satellite">Satelite</TabsTrigger>
+            <TabsTrigger value="light">Claro</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
-
-      <div className="absolute top-4 right-4 z-10">
+  
+      <div
+        className="absolute top-4 right-4"
+        style={{ zIndex: 10 }} // Botón encima del mapa
+      >
         <Button onClick={handleAddEvent} className="flex items-center gap-2">
           <PlusCircle size={16} />
           Añadir evento
         </Button>
       </div>
-      
+  
       <EventFormDialog 
         isOpen={isFormOpen} 
         onOpenChange={setIsFormOpen} 
         event={currentEvent}
         onSave={handleSaveEvent}
       />
-      
+  
       <style dangerouslySetInnerHTML={{ __html: `
         .custom-leaflet-marker {
           background: transparent;
@@ -371,5 +382,4 @@ export function MapContainer({
         }
       `}} />
     </div>
-  );
-}
+  );}

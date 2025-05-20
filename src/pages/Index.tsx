@@ -20,36 +20,36 @@ const Index = () => {
   
   const [activeFilters, setActiveFilters] = useState({
     types: {
-      apparition: true,
-      aggression: true,
-      sound: true,
-      other: true
+      Aparicion: true,
+      Agresion: true,
+      Sonido: true,
+      Otro: true
     },
     genders: {
-      male: true,
-      female: true,
-      other: true
+      Masculino: true,
+      Femenino: true,
+      Otro: true
     }
   });
   
   // Estadísticas de eventos activos según filtros
   const activeCounts = {
     types: {
-      apparition: events.filter(e => e.type === 'apparition' && 
+      Aparicion: events.filter(e => e.type === 'Aparicion' && 
                                activeFilters.genders[e.reporterGender as keyof typeof activeFilters.genders]).length,
-      aggression: events.filter(e => e.type === 'aggression' && 
+      Agresion: events.filter(e => e.type === 'Agresion' && 
                                activeFilters.genders[e.reporterGender as keyof typeof activeFilters.genders]).length,
-      sound: events.filter(e => e.type === 'sound' && 
+      Sonido: events.filter(e => e.type === 'Sonido' && 
                          activeFilters.genders[e.reporterGender as keyof typeof activeFilters.genders]).length,
-      other: events.filter(e => e.type === 'other' && 
+      Otro: events.filter(e => e.type === 'Otro' && 
                         activeFilters.genders[e.reporterGender as keyof typeof activeFilters.genders]).length
     },
     genders: {
-      male: events.filter(e => e.reporterGender === 'male' && 
+      Masculino: events.filter(e => e.reporterGender === 'Masculino' && 
                         activeFilters.types[e.type as keyof typeof activeFilters.types]).length,
-      female: events.filter(e => e.reporterGender === 'female' && 
+      Femenino: events.filter(e => e.reporterGender === 'Femenino' && 
                           activeFilters.types[e.type as keyof typeof activeFilters.types]).length,
-      other: events.filter(e => e.reporterGender === 'other' && 
+      Otro: events.filter(e => e.reporterGender === 'Otro' && 
                          activeFilters.types[e.type as keyof typeof activeFilters.types]).length
     },
     total: events.filter(e => 

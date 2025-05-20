@@ -17,15 +17,15 @@ export interface SidebarProps {
   };
   activeFilters?: {
     types: {
-      apparition: boolean;
-      aggression: boolean;
-      sound: boolean;
-      other: boolean;
+      Aparicion: boolean;
+      Agresion: boolean;
+      Sonido: boolean;
+      Otro: boolean;
     };
     genders: {
-      male: boolean;
-      female: boolean;
-      other: boolean;
+      Masculino: boolean;
+      Femenino: boolean;
+      Otro: boolean;
     }
   };
 }
@@ -34,7 +34,7 @@ export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts
   return (
     <div className="flex flex-col h-full">
       <div className="text-center mb-6">
-        <h1 className="font-display text-3xl font-bold">Atlas Paranormal</h1>
+        <h1 className="font-display text-3xl font-bold">Icesi Mapa Paranormal</h1>
         <p className="text-muted-foreground mt-1">Santiago de Cali, Colombia</p>
       </div>
       
@@ -55,39 +55,39 @@ export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts
               <AccordionContent>
                 <div className="space-y-4">
                   <FilterOption
-                    id="apparition"
-                    icon={<Ghost className="h-5 w-5 text-event-apparition" />}
-                    label="Aparición"
+                    id="Aparicion"
+                    icon={<Ghost className="h-5 w-5 text-event-Aparicion" />}
+                    label="Aparicion"
                     count={activeCounts.types.apparition || 0}
-                    color="bg-event-apparition"
-                    onCheckedChange={(checked) => onTypeFilterChange('apparition', checked)}
+                    color="bg-event-Aparicion"
+                    onCheckedChange={(checked) => onTypeFilterChange('Aparicion', checked)}
                   />
                   
                   <FilterOption
-                    id="aggression"
-                    icon={<Angry className="h-5 w-5 text-event-aggression" />}
+                    id="Agresion"
+                    icon={<Angry className="h-5 w-5 text-event-Agresion" />}
                     label="Agresión"
-                    count={activeCounts.types.aggression || 0}
-                    color="bg-event-aggression"
-                    onCheckedChange={(checked) => onTypeFilterChange('aggression', checked)}
+                    count={activeCounts.types.Agresion || 0}
+                    color="bg-event-Agresion"
+                    onCheckedChange={(checked) => onTypeFilterChange('Agresion', checked)}
                   />
                   
                   <FilterOption
-                    id="sound"
-                    icon={<Speaker className="h-5 w-5 text-event-sound" />}
+                    id="Sonido"
+                    icon={<Speaker className="h-5 w-5 text-event-Sonido" />}
                     label="Sonido"
-                    count={activeCounts.types.sound || 0}
-                    color="bg-event-sound"
-                    onCheckedChange={(checked) => onTypeFilterChange('sound', checked)}
+                    count={activeCounts.types.Sonido || 0}
+                    color="bg-event-Sonido"
+                    onCheckedChange={(checked) => onTypeFilterChange('Sonido', checked)}
                   />
                   
                   <FilterOption
-                    id="other"
-                    icon={<HelpCircle className="h-5 w-5 text-event-other" />}
+                    id="Otro"
+                    icon={<HelpCircle className="h-5 w-5 text-event-Otro" />}
                     label="Otros"
-                    count={activeCounts.types.other || 0}
-                    color="bg-event-other"
-                    onCheckedChange={(checked) => onTypeFilterChange('other', checked)}
+                    count={activeCounts.types.Otro || 0}
+                    color="bg-event-Otro"
+                    onCheckedChange={(checked) => onTypeFilterChange('Otro', checked)}
                   />
                 </div>
               </AccordionContent>
@@ -98,30 +98,30 @@ export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts
               <AccordionContent>
                 <div className="space-y-4">
                   <FilterOption
-                    id="female"
+                    id="Femenino"
                     icon={<UserRound className="h-5 w-5 text-foreground" />}
                     label="Mujer"
-                    count={activeCounts.genders.female || 0}
-                    color="bg-gender-female"
-                    onCheckedChange={(checked) => onGenderFilterChange('female', checked)}
+                    count={activeCounts.genders.Femenino || 0}
+                    color="bg-gender-Femenino"
+                    onCheckedChange={(checked) => onGenderFilterChange('Femenino', checked)}
                   />
                   
                   <FilterOption
-                    id="male"
+                    id="Masculino"
                     icon={<UserRound className="h-5 w-5 text-foreground" />}
                     label="Hombre"
-                    count={activeCounts.genders.male || 0}
-                    color="bg-gender-male"
-                    onCheckedChange={(checked) => onGenderFilterChange('male', checked)}
+                    count={activeCounts.genders.Masculino || 0}
+                    color="bg-gender-Masculino"
+                    onCheckedChange={(checked) => onGenderFilterChange('Masculino', checked)}
                   />
                   
                   <FilterOption
-                    id="other-gender"
+                    id="Otro-gender"
                     icon={<UserRound className="h-5 w-5 text-foreground" />}
                     label="Otro"
-                    count={activeCounts.genders.other || 0}
-                    color="bg-gender-other"
-                    onCheckedChange={(checked) => onGenderFilterChange('other', checked)}
+                    count={activeCounts.genders.Otro || 0}
+                    color="bg-gender-Otro"
+                    onCheckedChange={(checked) => onGenderFilterChange('Otro', checked)}
                   />
                 </div>
               </AccordionContent>
@@ -136,19 +136,19 @@ export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts
             <div className="space-y-2">
               <h4 className="text-sm text-muted-foreground">Tipos de Eventos</h4>
               <div className="grid grid-cols-2 gap-2">
-                <LegendItem color="bg-event-apparition" label="Aparición" icon={<Ghost size={14} />} />
-                <LegendItem color="bg-event-aggression" label="Agresión" icon={<Angry size={14} />} />
-                <LegendItem color="bg-event-sound" label="Sonido" icon={<Speaker size={14} />} />
-                <LegendItem color="bg-event-other" label="Otros" icon={<HelpCircle size={14} />} />
+                <LegendItem color="bg-event-Aparicion" label="Aparición" icon={<Ghost size={14} />} />
+                <LegendItem color="bg-event-Agresion" label="Agresión" icon={<Angry size={14} />} />
+                <LegendItem color="bg-event-Sonido" label="Sonido" icon={<Speaker size={14} />} />
+                <LegendItem color="bg-event-Otro" label="Otros" icon={<HelpCircle size={14} />} />
               </div>
             </div>
             
             <div className="space-y-2">
               <h4 className="text-sm text-muted-foreground">Género del Testigo</h4>
               <div className="grid grid-cols-3 gap-2">
-                <LegendItem color="bg-gender-female" label="Mujer" />
-                <LegendItem color="bg-gender-male" label="Hombre" />
-                <LegendItem color="bg-gender-other" label="Otro" />
+                <LegendItem color="bg-gender-Femenino" label="Mujer" />
+                <LegendItem color="bg-gender-Masculino" label="Hombre" />
+                <LegendItem color="bg-gender-Otro" label="Otro" />
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts
         
         <TabsContent value="info">
           <div className="space-y-4">
-            <h2 className="text-xl font-bold">Atlas Paranormal de Cali</h2>
+            <h2 className="text-xl font-bold">Icesi Mapa Paranormal</h2>
             
             <p className="text-sm">
               Esta cartografía temática muestra los eventos paranormales reportados en Santiago de Cali, Colombia,
@@ -186,7 +186,7 @@ export function Sidebar({ onTypeFilterChange, onGenderFilterChange, activeCounts
       </Tabs>
       
       <div className="mt-auto pt-4 text-xs text-center text-muted-foreground">
-        © Atlas Paranormal {new Date().getFullYear()}
+        Icesi Mapa Paranormal {new Date().getFullYear()}
       </div>
     </div>
   );

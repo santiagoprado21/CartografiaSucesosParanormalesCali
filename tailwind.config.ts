@@ -65,16 +65,16 @@ export default {
 				},
 				// Colores para tipos de eventos
 				event: {
-					apparition: '#8B5CF6', // Púrpura para apariciones
-					aggression: '#F97316', // Naranja para agresiones
-					sound: '#0EA5E9', // Azul para sonidos
-					other: '#2DD4BF', // Turquesa para otros
+					Aparicion: '#8B5CF6', // Púrpura para apariciones
+					Agresion: '#F97316', // Naranja para agresiones
+					Sonido: '#0EA5E9', // Azul para sonidos
+					Otro: '#2DD4BF', // Turquesa para otros
 				},
 				// Colores para género
 				gender: {
-					female: '#FFDEE2', // Rosa suave para mujer
-					male: '#D3E4FD', // Azul suave para hombre
-					other: '#E5DEFF', // Púrpura suave para otro
+					Femenino: '#FFDEE2', // Rosa suave para mujer
+					Masculino: '#D3E4FD', // Azul suave para hombre
+					Otro: '#E5DEFF', // Púrpura suave para otro
 				}
 			},
 			borderRadius: {

@@ -30,8 +30,8 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
   const [formData, setFormData] = useState<Partial<ParanormalEvent>>({
     title: "",
     description: "",
-    type: "apparition",
-    reporterGender: "female",
+    type: "Aparicion",
+    reporterGender: "Femenino",
     date: new Date().toLocaleDateString("es-ES"),
     latitude: 3.452,
     longitude: -76.522,
@@ -49,8 +49,8 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
       setFormData({
         title: "",
         description: "",
-        type: "apparition",
-        reporterGender: "female",
+        type: "Aparicion",
+        reporterGender: "Femenino",
         date: new Date().toLocaleDateString("es-ES"),
         latitude: 3.452,
         longitude: -76.522,
@@ -161,10 +161,10 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
                   <SelectValue placeholder="Selecciona tipo" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="apparition">Aparición</SelectItem>
-                  <SelectItem value="aggression">Agresión</SelectItem>
-                  <SelectItem value="sound">Sonido</SelectItem>
-                  <SelectItem value="other">Otro</SelectItem>
+                  <SelectItem value="Aparicion">Aparición</SelectItem>
+                  <SelectItem value="Agresion">Agresión</SelectItem>
+                  <SelectItem value="Sonido">Sonido</SelectItem>
+                  <SelectItem value="Otro">Otro</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -179,9 +179,9 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
                   <SelectValue placeholder="Selecciona género" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="female">Mujer</SelectItem>
-                  <SelectItem value="male">Hombre</SelectItem>
-                  <SelectItem value="other">Otro</SelectItem>
+                  <SelectItem value="Femenino">Mujer</SelectItem>
+                  <SelectItem value="Masculino">Hombre</SelectItem>
+                  <SelectItem value="Otro">Otro</SelectItem>
                 </SelectContent>
               </Select>
             </div>

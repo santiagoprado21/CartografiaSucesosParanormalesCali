@@ -3,8 +3,8 @@ export interface ParanormalEvent {
   id: string;
   title: string;
   description: string;
-  type: 'apparition' | 'aggression' | 'sound' | 'other';
-  reporterGender: 'male' | 'female' | 'other';
+  type: 'Aparicion' | 'Agresion' | 'Sonido' | 'Otro';
+  reporterGender: 'Masculino' | 'Femenino' | 'Otro';
   date: string;
   latitude: number;
   longitude: number;

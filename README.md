@@ -1,73 +1,48 @@
-# Welcome to your Lovable project
+# 👻 Icesi Mapa Paranormal
 
-## Project info
+Una cartografía temática que visualiza los **eventos paranormales reportados en Santiago de Cali, Colombia**, organizados por tipo de fenómeno y género del testigo. Este proyecto busca explorar el componente sociocultural de las experiencias paranormales a través de la geolocalización y la narrativa de los testigos.
 
-**URL**: https://lovable.dev/projects/43c9793b-23d0-4991-91f1-8796a347a38f
+---
 
-## How can I edit this code?
+## 🗺️ ¿Cómo usar este mapa?
 
-There are several ways of editing your application.
+- ✅ Filtra por **tipo de evento** (aparición, agresión, sonido, otros) o **género del testigo** (hombre, mujer, otro) mediante el panel de filtros.
+- 🖱️ Haz clic sobre los **marcadores** del mapa para acceder a la descripción detallada de cada suceso paranormal.
+- 🎨 Cambia el **estilo visual del mapa** desde las opciones en la esquina superior izquierda.
+- 🧭 Usa los **controles de navegación** para acercar, alejar o rotar el mapa según tus necesidades de análisis.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/43c9793b-23d0-4991-91f1-8796a347a38f) and start prompting.
+## 🔍 Metodología
 
-Changes made via Lovable will be committed automatically to this repo.
+Los datos han sido recopilados mediante:
 
-**Use your preferred IDE**
+- Entrevistas a residentes y visitantes.
+- Revisión de registros históricos y archivos periodísticos.
+- Reportes directos documentados en medios digitales.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Cada evento fue **verificado** y **clasificado** siguiendo una metodología basada en criterios de análisis de fenómenos paranormales, considerando tanto la percepción del testigo como el contexto del suceso.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 📌 Categorías de eventos
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- 👁️ **Aparición**: visiones o presencias no identificadas.
+- ⚔️ **Agresión**: experiencias físicas o violentas asociadas a lo paranormal.
+- 🔊 **Sonido**: ruidos inexplicables, voces, golpes, etc.
+- 🌀 **Otros**: sucesos extraños no clasificados en las categorías anteriores.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Cada categoría está representada con íconos y colores distintos para facilitar la exploración.
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## 📚 Créditos
 
-**Edit a file directly in GitHub**
+Este proyecto fue desarrollado como parte de un trabajo académico para la Universidad Icesi.  
+**Autor**: Santiago Prado  
+**Facultad**: Ciencias Sociales y Humanas / Ingeniería  
+**Año**: 2025
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/43c9793b-23d0-4991-91f1-8796a347a38f) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+> _"Lo que no se puede explicar, no significa que no exista."_
