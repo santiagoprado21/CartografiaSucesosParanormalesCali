@@ -14,6 +14,9 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Slider } from "@/components/ui/slider";
+import { useToast } from "@/hooks/use-toast";
 
 interface EventFormDialogProps {
   isOpen: boolean;
@@ -23,6 +26,7 @@ interface EventFormDialogProps {
 }
 
 export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFormDialogProps) {
+  const { toast } = useToast();
   const [formData, setFormData] = useState<Partial<ParanormalEvent>>({
     title: "",
     description: "",
@@ -31,6 +35,9 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
     date: new Date().toLocaleDateString("es-ES"),
     latitude: 3.452,
     longitude: -76.522,
+    intensity: 5,
+    verified: false,
+    imageUrl: "",
   });
 
   // Actualizar el formulario cuando se edita un evento existente
@@ -47,6 +54,9 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
         date: new Date().toLocaleDateString("es-ES"),
         latitude: 3.452,
         longitude: -76.522,
+        intensity: 5,
+        verified: false,
+        imageUrl: "",
       });
     }
   }, [event]);
@@ -63,12 +73,20 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
     
     // Validación básica
     if (!formData.title || !formData.description) {
+      toast({
+        title: "Campos incompletos",
+        description: "Por favor completa todos los campos obligatorios.",
+        variant: "destructive"
+      });
       return;
     }
 
+    // Generar un ID único si es un nuevo evento
+    const newId = event?.id || Math.random().toString(36).substring(2, 9);
+
     // Asegurar que todos los campos requeridos estén presentes
-    const eventToSave = {
-      id: event?.id || "",
+    const eventToSave: ParanormalEvent = {
+      id: newId,
       title: formData.title || "",
       description: formData.description || "",
       type: formData.type as ParanormalEvent["type"],
@@ -76,10 +94,31 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
       date: formData.date || new Date().toLocaleDateString("es-ES"),
       latitude: formData.latitude || 3.452,
       longitude: formData.longitude || -76.522,
+      intensity: formData.intensity,
+      verified: formData.verified || false,
+      imageUrl: formData.imageUrl,
     };
 
+    toast({
+      title: event ? "Evento actualizado" : "Evento añadido",
+      description: `${formData.title} ha sido ${event ? "actualizado" : "añadido"} exitosamente.`
+    });
+
     onSave(eventToSave);
+    onOpenChange(false);
   };
+
+  const imageOptions = [
+    { value: "", label: "Sin imagen" },
+    { value: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7", label: "Mujer con laptop" },
+    { value: "https://images.unsplash.com/photo-1518770660439-4636190af475", label: "Circuito negro" },
+    { value: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d", label: "Persona con MacBook" },
+    { value: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158", label: "Mujer en computadora" },
+    { value: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5", label: "Matrix" },
+    { value: "https://images.unsplash.com/photo-1506744038136-46273834b3fb", label: "Paisaje con lago" },
+    { value: "https://images.unsplash.com/photo-1501854140801-50d01698950b", label: "Montañas verdes" },
+    { value: "https://images.unsplash.com/photo-1518877593221-1f28583780b4", label: "Ballena saltando" }
+  ];
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -180,6 +219,61 @@ export function EventFormDialog({ isOpen, onOpenChange, event, onSave }: EventFo
                 onChange={(e) => handleChange("longitude", parseFloat(e.target.value))}
               />
             </div>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="intensity">Intensidad del evento (1-10)</Label>
+            <div className="flex items-center gap-4 pt-2">
+              <span className="text-xs">1</span>
+              <Slider
+                id="intensity"
+                min={1}
+                max={10}
+                step={1}
+                value={[formData.intensity || 5]}
+                onValueChange={(values) => handleChange("intensity", values[0])}
+                className="flex-1"
+              />
+              <span className="text-xs">10</span>
+              <span className="ml-2 w-8 text-center font-bold">{formData.intensity || 5}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Checkbox 
+              id="verified" 
+              checked={formData.verified || false}
+              onCheckedChange={(checked) => handleChange("verified", checked)}
+            />
+            <Label htmlFor="verified" className="cursor-pointer">Evento verificado</Label>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="imageUrl">Imagen</Label>
+            <Select 
+              value={formData.imageUrl || ""} 
+              onValueChange={(value) => handleChange("imageUrl", value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Selecciona una imagen" />
+              </SelectTrigger>
+              <SelectContent>
+                {imageOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {formData.imageUrl && (
+              <div className="mt-2">
+                <img 
+                  src={formData.imageUrl} 
+                  alt="Vista previa" 
+                  className="h-32 w-full object-cover rounded-md border border-border"
+                />
+              </div>
+            )}
           </div>
           
           <div className="flex justify-end gap-2 pt-2">

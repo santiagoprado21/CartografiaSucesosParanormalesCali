@@ -1,4 +1,3 @@
-
 import { ParanormalEvent } from '@/types/ParanormalEvent';
 
 // Datos simulados para Santiago de Cali
@@ -11,7 +10,10 @@ export const MOCK_EVENTS: ParanormalEvent[] = [
     reporterGender: 'male',
     date: '12/04/2023',
     latitude: 3.451, 
-    longitude: -76.532
+    longitude: -76.532,
+    intensity: 8,
+    verified: true,
+    imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb'
   },
   {
     id: '2',
@@ -21,7 +23,10 @@ export const MOCK_EVENTS: ParanormalEvent[] = [
     reporterGender: 'female',
     date: '23/06/2023',
     latitude: 3.454,
-    longitude: -76.534
+    longitude: -76.534,
+    intensity: 7,
+    verified: true,
+    imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
   },
   {
     id: '3',
@@ -152,5 +157,191 @@ export const MOCK_EVENTS: ParanormalEvent[] = [
     date: '22/09/2023',
     latitude: 3.446,
     longitude: -76.543
+  },
+  {
+    id: '16',
+    title: 'Fenómeno lumínico en Chipichape',
+    description: 'Varios clientes del centro comercial reportaron ver luces de colores que se movían de forma no natural a través de los pasillos después del horario de cierre.',
+    type: 'apparition',
+    reporterGender: 'female',
+    date: '05/01/2024',
+    latitude: 3.463,
+    longitude: -76.528,
+    intensity: 6,
+    verified: false
+  },
+  {
+    id: '17',
+    title: 'Sensación de ahogo en Pance',
+    description: 'Excursionistas reportaron sentir que algo les apretaba el cuello mientras acampaban cerca del río en una zona específica.',
+    type: 'aggression',
+    reporterGender: 'male',
+    date: '19/02/2024',
+    latitude: 3.322,
+    longitude: -76.571,
+    intensity: 8,
+    verified: true,
+    imageUrl: 'https://images.unsplash.com/photo-1501854140801-50d01698950b'
+  },
+  {
+    id: '18',
+    title: 'Cánticos antiguos en ruinas coloniales',
+    description: 'Arqueólogos documentaron grabaciones de cánticos en una lengua desconocida que aparecían en sus equipos sin explicación mientras excavaban en ruinas coloniales.',
+    type: 'sound',
+    reporterGender: 'other',
+    date: '14/03/2024',
+    latitude: 3.442,
+    longitude: -76.527,
+    intensity: 7,
+    verified: true
+  },
+  {
+    id: '19',
+    title: 'Niebla con formas humanas',
+    description: 'Vecinos del barrio Granada reportan haber visto niebla que adopta formas humanas y parece seguir a los transeúntes durante las noches más frías.',
+    type: 'apparition',
+    reporterGender: 'female',
+    date: '28/03/2024',
+    latitude: 3.458,
+    longitude: -76.528,
+    intensity: 5,
+    verified: false,
+    imageUrl: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4'
+  },
+  {
+    id: '20',
+    title: 'Pájaros inmóviles en el aire',
+    description: 'Varios testigos reportaron ver grupos de pájaros completamente inmóviles en el aire, como si el tiempo se hubiera detenido, durante aproximadamente 3 minutos.',
+    type: 'other',
+    reporterGender: 'male',
+    date: '04/04/2024',
+    latitude: 3.401,
+    longitude: -76.543,
+    intensity: 9,
+    verified: true
+  },
+  {
+    id: '21',
+    title: 'Voces infantiles en escuela abandonada',
+    description: 'Vecinos del sector reportan escuchar risas y voces de niños provenientes de una escuela que lleva abandonada más de 15 años.',
+    type: 'sound',
+    reporterGender: 'female',
+    date: '11/04/2024',
+    latitude: 3.426,
+    longitude: -76.552,
+    intensity: 8,
+    verified: false
+  },
+  {
+    id: '22',
+    title: 'Muebles reordenados',
+    description: 'Una familia reporta que al volver a casa después del trabajo, encuentran todos los muebles en posiciones distintas a como los dejaron, a pesar de que la casa estaba cerrada.',
+    type: 'aggression',
+    reporterGender: 'male',
+    date: '17/04/2024',
+    latitude: 3.437,
+    longitude: -76.532,
+    intensity: 6,
+    verified: true,
+    imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d'
+  },
+  {
+    id: '23',
+    title: 'Sombra gigante en el Cerro de las Tres Cruces',
+    description: 'Excursionistas reportan haber visto una sombra humanoide de proporciones gigantes proyectada sobre la montaña, sin ninguna fuente que pudiera proyectarla.',
+    type: 'apparition',
+    reporterGender: 'other',
+    date: '23/04/2024',
+    latitude: 3.467,
+    longitude: -76.556,
+    intensity: 9,
+    verified: false
+  },
+  {
+    id: '24',
+    title: 'Marcas circulares en cultivos',
+    description: 'Agricultores de la zona rural encontraron patrones geométricos perfectos en sus cultivos que aparecieron de la noche a la mañana sin explicación.',
+    type: 'other',
+    reporterGender: 'male',
+    date: '01/05/2024',
+    latitude: 3.390,
+    longitude: -76.510,
+    intensity: 7,
+    verified: true,
+    imageUrl: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7'
+  },
+  {
+    id: '25',
+    title: 'Interferencias electrónicas en la Universidad',
+    description: 'Estudiantes y profesores reportan que todos los dispositivos electrónicos fallan simultáneamente en determinados salones del edificio de ingeniería.',
+    type: 'other',
+    reporterGender: 'female',
+    date: '07/05/2024',
+    latitude: 3.375,
+    longitude: -76.534,
+    intensity: 6,
+    verified: false
+  },
+  {
+    id: '26',
+    title: 'Temperatura bajo cero en habitación sellada',
+    description: 'Una familia reportó que una habitación específica de su casa alcanzó temperaturas bajo cero en pleno día caluroso, formando escarcha en las paredes.',
+    type: 'other',
+    reporterGender: 'male',
+    date: '12/05/2024',
+    latitude: 3.447,
+    longitude: -76.539,
+    intensity: 8,
+    verified: true,
+    imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5'
+  },
+  {
+    id: '27',
+    title: 'Reloj que retrocede',
+    description: 'Empleados de una oficina reportan que a las 3:33 pm todos los días, el reloj de pared principal retrocede exactamente 33 minutos para luego volver a la hora correcta.',
+    type: 'other',
+    reporterGender: 'female',
+    date: '16/05/2024',
+    latitude: 3.452,
+    longitude: -76.530,
+    intensity: 7,
+    verified: false
+  },
+  {
+    id: '28',
+    title: 'Perros que ladran al vacío',
+    description: 'Residentes del barrio El Peñón reportan que sus perros se alinean todos los anocheceres ladrando a un punto específico en el cielo donde no hay nada visible.',
+    type: 'sound',
+    reporterGender: 'other',
+    date: '19/05/2024',
+    latitude: 3.452,
+    longitude: -76.540,
+    intensity: 5,
+    verified: true
+  },
+  {
+    id: '29',
+    title: 'Fotografías con rostros adicionales',
+    description: 'Visitantes de un restaurante tradicional reportan que al tomar fotografías aparecen rostros adicionales de personas que no estaban presentes.',
+    type: 'apparition',
+    reporterGender: 'female',
+    date: '01/06/2024',
+    latitude: 3.448,
+    longitude: -76.535,
+    intensity: 9,
+    verified: false,
+    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158'
+  },
+  {
+    id: '30',
+    title: 'Melodía repetitiva en la Casa Proartes',
+    description: 'Personal de limpieza reporta escuchar siempre la misma melodía de piano antigua cuando están solos en el edificio, a pesar de que no hay piano en el lugar.',
+    type: 'sound',
+    reporterGender: 'male',
+    date: '08/06/2024',
+    latitude: 3.454,
+    longitude: -76.536,
+    intensity: 6,
+    verified: true
   }
 ];
