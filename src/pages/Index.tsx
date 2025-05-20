@@ -74,7 +74,13 @@ const Index = () => {
   return (
     <MapLayout
       isMobile={isMobile}
-      map={<MapContainer />}
+      map={
+        <MapContainer 
+          activeFilters={activeFilters}
+          onTypeFilterChange={handleTypeFilterChange}
+          onGenderFilterChange={handleGenderFilterChange}
+        />
+      }
       sidebar={
         <Sidebar
           onTypeFilterChange={handleTypeFilterChange}

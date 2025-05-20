@@ -6,6 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from '@/lib/utils';
 import { ParanormalEvent } from '@/types/ParanormalEvent';
 import { MOCK_EVENTS } from '@/data/mockEvents';
+import { Button } from "@/components/ui/button";
+import { PlusCircle } from "lucide-react";
+import { EventFormDialog } from "@/components/EventFormDialog";
 
 interface MapContainerProps {
   className?: string;
@@ -30,6 +33,8 @@ export function MapContainer({ className }: MapContainerProps) {
       other: true
     }
   });
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState<ParanormalEvent | null>(null);
   
   // Inicializar mapa
   useEffect(() => {
@@ -180,8 +185,27 @@ export function MapContainer({ className }: MapContainerProps) {
             <span class="inline-block w-3 h-3 rounded-full" style="background-color:${backgroundColor}"></span>
             <span class="text-sm">${event.reporterGender.charAt(0).toUpperCase() + event.reporterGender.slice(1)} witness</span>
           </div>
+          <div class="mt-3 text-center">
+            <button class="edit-event-btn bg-primary text-primary-foreground hover:bg-primary/90 px-2 py-1 rounded text-xs" data-event-id="${event.id}">Editar evento</button>
+          </div>
         </div>
       `);
+
+      // Añadir listener para editar evento desde el popup
+      marker.on('popupopen', () => {
+        setTimeout(() => {
+          const editBtn = document.querySelector(`.edit-event-btn[data-event-id="${event.id}"]`) as HTMLElement;
+          if (editBtn) {
+            editBtn.addEventListener('click', () => {
+              const eventToEdit = events.find(e => e.id === event.id);
+              if (eventToEdit) {
+                setCurrentEvent(eventToEdit);
+                setIsFormOpen(true);
+              }
+            });
+          }
+        }, 100);
+      });
       
       marker.addTo(map.current);
       markers.current.push(marker);
@@ -193,6 +217,51 @@ export function MapContainer({ className }: MapContainerProps) {
     if (!map.current) return;
     setMapStyle(value);
     updateMapStyle(value);
+  };
+
+  // Manejar filtros
+  const handleTypeFilterChange = (type: keyof typeof activeFilters.types, checked: boolean) => {
+    setActiveFilters(prev => ({
+      ...prev,
+      types: {
+        ...prev.types,
+        [type]: checked
+      }
+    }));
+  };
+
+  const handleGenderFilterChange = (gender: keyof typeof activeFilters.genders, checked: boolean) => {
+    setActiveFilters(prev => ({
+      ...prev,
+      genders: {
+        ...prev.genders,
+        [gender]: checked
+      }
+    }));
+  };
+
+  // Manejar eventos
+  const handleAddEvent = () => {
+    setCurrentEvent(null);
+    setIsFormOpen(true);
+  };
+
+  const handleSaveEvent = (event: ParanormalEvent) => {
+    if (currentEvent) {
+      // Editar evento existente
+      setEvents(prevEvents => 
+        prevEvents.map(e => e.id === event.id ? event : e)
+      );
+    } else {
+      // Añadir nuevo evento
+      const newEvent = {
+        ...event,
+        id: crypto.randomUUID(),
+      };
+      setEvents(prevEvents => [...prevEvents, newEvent]);
+    }
+    setIsFormOpen(false);
+    setCurrentEvent(null);
   };
 
   return (
@@ -207,6 +276,20 @@ export function MapContainer({ className }: MapContainerProps) {
           </TabsList>
         </Tabs>
       </div>
+
+      <div className="absolute top-4 right-4 z-10">
+        <Button onClick={handleAddEvent} className="flex items-center gap-2">
+          <PlusCircle size={16} />
+          Añadir evento
+        </Button>
+      </div>
+      
+      <EventFormDialog 
+        isOpen={isFormOpen} 
+        onOpenChange={setIsFormOpen} 
+        event={currentEvent}
+        onSave={handleSaveEvent}
+      />
       
       <style dangerouslySetInnerHTML={{ __html: `
         .custom-leaflet-marker {
